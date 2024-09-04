@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import Info from "./Info";
 import "../Styles/Main.css";
@@ -8,6 +9,8 @@ import {
   BiEnvelope,
   BiCheckCircle,
 } from "react-icons/bi";
+
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 const cardDetails = [
   {
@@ -81,6 +84,8 @@ function Contact() {
     }
   };
 
+  const year = new Date().getFullYear()
+
   return (
     <div id="contact-section">
       <div className="contact">
@@ -121,6 +126,23 @@ function Contact() {
             <br />
             <button type="submit">Send Message</button>
           </form>
+        </div>
+        <div className="links">
+          <div>
+            <Link to="https://github.com/Headaddi" style={{ color: "black" }}>
+              <FaGithub style={{ height: "20px", width: "20px" }} />
+            </Link>
+          </div>
+          <div>
+            {" "}
+            <Link
+              to="https://www.linkedin.com/in/ikenna-noble-asiegbulam/"
+              style={{ color: "black" }}
+            >
+              <FaLinkedin style={{ height: "20px", width: "20px" }} />
+            </Link> 
+          </div>
+          <p>© {year} Ikenna Noble Asiegbulam</p>
         </div>
       </div>
     </div>
