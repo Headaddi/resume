@@ -96,10 +96,10 @@ function Contact() {
           <form onSubmit={handleSubmit}>
             <input
               type="text"
-              name="fullname"
+              name="name"
               value={formData.name}
-              placeholder="Full Name"
               onChange={handleChange}
+              placeholder="Full Name"
               required
             />
             <br />

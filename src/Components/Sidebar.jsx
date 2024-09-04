@@ -20,37 +20,37 @@ function Sidebar() {
       <h2>Ikenna</h2>
       <ul className="navigation">
         <li
-          className={active === "Home" && "active"}
+          className={active === "Home" ? "active" : ''}
           onClick={() => handleClick("Home")}
         >
           <a href="#hero-section">Home</a>
         </li>
         <li
-          className={active === "about" && "active"}
+          className={active === "about" ? "active" : ''}
           onClick={() => handleClick("about")}
         >
           <a href="#about-section">About Me</a>
         </li>
         <li
-          className={active === "skills" && "active"}
+          className={active === "skills" ? "active" : ''}
           onClick={() => handleClick("skills")}
         >
           <a href="#skills-section">Skills</a>
         </li>
         <li
-          className={active === "portfolio" && "active"}
+          className={active === "portfolio" ? "active" : ''}
           onClick={() => handleClick("portfolio")}
         >
           <a href="#portfolio-section">Porftolio</a>
         </li>
         <li
-          className={active === "blog" && "active"}
+          className={active === "blog" ? "active" : ''}
           onClick={() => handleClick("blog")}
         >
           <a href="#blog-section">Blog</a>
         </li>
         <li
-          className={active === "contact" && "active"}
+          className={active === "contact" ? "active" : ''}
           onClick={() => handleClick("contact")}
         >
           <a href="#contact-section">Contact</a>
