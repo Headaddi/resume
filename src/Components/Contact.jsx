@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import emailjs from 'emailjs-com'
 import axios from "axios";
 import Info from "./Info";
 import "../Styles/Main.css";
@@ -53,35 +54,26 @@ function Contact() {
     message: "",
   });
 
-  const [submissionStatus, setSubmissionStatus] = useState("");
 
   // Handle changes to form fields
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   // Handle form submission
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault(); // Prevent default form submission behavior
 
-    try {
-      const response = await axios.post("/api/submit", formData);
-      console.log("Success:", response.data);
-      setSubmissionStatus("Form submitted successfully!");
-      // Clear the form fields
-      setFormData({
-        name: "",
-        email: "",
-        message: "",
+    emailjs.send('service_1ny1gma', 'template_33uin4a', formData, 'Aagb1RPf4Dsx8ZICh')
+      .then((response) => {
+        alert('Email sent successfully!');
+        setFormData({ name: '', email: '', message: '' });
+      }, (err) => {
+        alert('Failed to send email.');
+        console.error('Failed to send email:', err);
       });
-    } catch (error) {
-      console.error("Error:", error);
-      setSubmissionStatus("Failed to submit the form.");
-    }
+    
   };
 
   const year = new Date().getFullYear()
@@ -93,7 +85,7 @@ function Contact() {
 
         <div className="details">
           {cardDetails.map((item) => (
-            <Card icon={item.icon} detail={item.detail} />
+            <Card icon={item.icon} detail={item.detail} key={item.key} />
           ))}
         </div>
 
@@ -105,8 +97,10 @@ function Contact() {
             <input
               type="text"
               name="fullname"
+              value={formData.name}
               placeholder="Full Name"
               onChange={handleChange}
+              required
             />
             <br />
             <input
@@ -115,6 +109,7 @@ function Contact() {
               value={formData.email}
               placeholder="Email Address"
               onChange={handleChange}
+              required
             />
             <br />
             <textarea
@@ -122,6 +117,7 @@ function Contact() {
               value={formData.message}
               placeholder="Your Message"
               onChange={handleChange}
+              required
             ></textarea>
             <br />
             <button type="submit">Send Message</button>

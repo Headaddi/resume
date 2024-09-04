@@ -162,10 +162,12 @@
 
 .works{
     margin-top: 50px;
-    display: flex;
+    width: 450px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
-    gap: 20px;
-    justify-content: space-between;
+    gap: 50px;
+    justify-content:flex-start;
 }
 
 .works img{
@@ -663,6 +665,7 @@
 .works{
     margin-top: 50px;
     display: block;
+    width: 450px;
 }
 
 .works img{
