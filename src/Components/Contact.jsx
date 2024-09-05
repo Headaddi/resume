@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import emailjs from 'emailjs-com'
+import emailjs from "emailjs-com";
 import axios from "axios";
 import Info from "./Info";
 import "../Styles/Main.css";
@@ -54,8 +54,7 @@ function Contact() {
     message: "",
   });
 
-
-  // Handle changes to form fields
+  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -65,20 +64,41 @@ function Contact() {
   const handleSubmit = (event) => {
     event.preventDefault(); // Prevent default form submission behavior
 
-    emailjs.send('service_1ny1gma', 'template_33uin4a', {
-      from_name: formData.name,
-      from_email: formData.email,
-      message: formData.message
-    }, 'Aagb1RPf4Dsx8ZICh')
-    .then((response) => {
-      console.log('Email sent successfully', response);
-    }, (error) => {
-      console.error('Error sending email', error);
-    });
-    
+    emailjs
+      .send(
+        "service_1ny1gma",
+        "template_33uin4a",
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+        },
+        "Aagb1RPf4Dsx8ZICh"
+      )
+      .then(
+        (response) => {
+          console.log("Email sent successfully", response);
+
+          // Reset form data after successful submission
+          setFormData({
+            name: "",
+            email: "",
+            message: "",
+          });
+
+          // Success message to the user
+          alert("Message sent successfully!");
+        },
+        (error) => {
+          console.error("Error sending email", error);
+        }
+      );
+
+    // Error message to the user
+    alert("Failed to send message. Please try again");
   };
 
-  const year = new Date().getFullYear()
+  const year = new Date().getFullYear();
 
   return (
     <div id="contact-section">
@@ -138,7 +158,7 @@ function Contact() {
               style={{ color: "black" }}
             >
               <FaLinkedin style={{ height: "20px", width: "20px" }} />
-            </Link> 
+            </Link>
           </div>
           <p>© {year} Ikenna Noble Asiegbulam</p>
         </div>
