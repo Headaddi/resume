@@ -65,14 +65,16 @@ function Contact() {
   const handleSubmit = (event) => {
     event.preventDefault(); // Prevent default form submission behavior
 
-    emailjs.send('service_1ny1gma', 'template_33uin4a', formData, 'Aagb1RPf4Dsx8ZICh')
-      .then((response) => {
-        alert('Email sent successfully!');
-        setFormData({ name: '', email: '', message: '' });
-      }, (err) => {
-        alert('Failed to send email.');
-        console.error('Failed to send email:', err);
-      });
+    emailjs.send('service_1ny1gma', 'template_33uin4a', {
+      from_name: formData.name,
+      from_email: formData.email,
+      message: formData.message
+    }, 'Aagb1RPf4Dsx8ZICh')
+    .then((response) => {
+      console.log('Email sent successfully', response);
+    }, (error) => {
+      console.error('Error sending email', error);
+    });
     
   };
 
