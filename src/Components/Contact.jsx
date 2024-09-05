@@ -54,6 +54,8 @@ function Contact() {
     message: "",
   });
 
+  const [feedbackMessage, setFeedbackMessage] = useState('');
+
   // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -78,24 +80,21 @@ function Contact() {
       .then(
         (response) => {
           console.log("Email sent successfully", response);
-
+          setFeedbackMessage("Message sent successfully!");
+          alert("Message sent successfully!")
           // Reset form data after successful submission
           setFormData({
             name: "",
             email: "",
             message: "",
           });
-
-          // Success message to the user
-          alert("Message sent successfully!");
         },
         (error) => {
           console.error("Error sending email", error);
+          setFeedbackMessage('Failed to send message')
+          alert('Failed to send message')
         }
       );
-
-    // Error message to the user
-    alert("Failed to send message. Please try again");
   };
 
   const year = new Date().getFullYear();
